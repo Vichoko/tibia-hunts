@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Vichoko/tibia-hunts/compare/v1.0.0...v1.0.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* correct semantic-release rules for proper semver ([dcfad63](https://github.com/Vichoko/tibia-hunts/commit/dcfad63a501e51db13c7bba678d26907ad1009a6))
+
 # 1.0.0 (2025-08-28)
 
 
