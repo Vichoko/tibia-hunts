@@ -22,7 +22,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "poetry version ${nextRelease.version}"
+        "prepareCmd": "sed -i 's/version = \".*\"/version = \"${nextRelease.version}\"/' pyproject.toml"
       }
     ],
     [
@@ -40,4 +40,3 @@
     ]
   ]
 }
-
