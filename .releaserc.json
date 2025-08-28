@@ -1,18 +1,8 @@
 {
   "branches": ["main"],
   "plugins": [
-    [
-      "@semantic-release/commit-analyzer",
-      {
-        "preset": "conventionalcommits"
-      }
-    ],
-    [
-      "@semantic-release/release-notes-generator",
-      {
-        "preset": "conventionalcommits"
-      }
-    ],
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
     [
       "@semantic-release/changelog",
       {
@@ -22,7 +12,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "sed -i 's/version = \".*\"/version = \"${nextRelease.version}\"/' pyproject.toml"
+        "prepareCmd": "sed 's/version = \"[^\"]*\"/version = \"${nextRelease.version}\"/' pyproject.toml > pyproject.toml.tmp && mv pyproject.toml.tmp pyproject.toml"
       }
     ],
     [
@@ -35,8 +25,6 @@
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
-    [
-      "@semantic-release/github"
-    ]
+    "@semantic-release/github"
   ]
 }
