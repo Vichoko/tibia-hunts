@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Vichoko/tibia-hunts/compare/v1.1.0...v1.1.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* configure package-mode false and add no-root flag to CI ([0556b9f](https://github.com/Vichoko/tibia-hunts/commit/0556b9f1e1637f6269317f3c923fae7c0e2334b8))
+
 # [1.1.0](https://github.com/Vichoko/tibia-hunts/compare/v1.0.1...v1.1.0) (2025-08-28)
 
 
