@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Vichoko/tibia-hunts/compare/v1.3.0...v1.4.0) (2025-08-28)
+
+
+### Features
+
+* add PR title validation for conventional commits ([#2](https://github.com/Vichoko/tibia-hunts/issues/2)) ([dbacdf7](https://github.com/Vichoko/tibia-hunts/commit/dbacdf79bfacff3b7bece033b105db05267a9191))
+
 # [1.3.0](https://github.com/Vichoko/tibia-hunts/compare/v1.2.0...v1.3.0) (2025-08-28)
 
 
