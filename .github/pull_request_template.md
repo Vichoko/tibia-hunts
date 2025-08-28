@@ -1,42 +1,42 @@
-## Descripción
+## Description
 
-Breve descripción de los cambios realizados.
+Brief description of the changes made.
 
-## ⚠️ Verificar Título del PR
+## ⚠️ Check PR Title
 
-**IMPORTANTE**: El título de este PR debe seguir el formato conventional commits:
-- ✅ Formato: `type(scope): description`
-- ✅ Ejemplos válidos: `feat: add user auth`, `fix(api): resolve bug`, `docs: update readme`
-- ❌ NO válido: `Add feature`, `Fix bug`, `Update`
+**IMPORTANT**: This PR title must follow the conventional commits format:
+- ✅ Format: `type(scope): description`
+- ✅ Valid examples: `feat: add user auth`, `fix(api): resolve bug`, `docs: update readme`
+- ❌ NOT valid: `Add feature`, `Fix bug`, `Update`
 
-## Tipo de cambio
+## Type of change
 
-- [ ] Bug fix (cambio que corrige un problema)
-- [ ] Nueva funcionalidad (cambio que agrega funcionalidad)
-- [ ] Breaking change (cambio que puede romper funcionalidad existente)
-- [ ] Refactoring (cambio de código que no corrige bugs ni agrega funcionalidad)
-- [ ] Documentación
-- [ ] Configuración/CI
+- [ ] Bug fix (change that fixes an issue)
+- [ ] New feature (change that adds functionality)
+- [ ] Breaking change (change that may break existing functionality)
+- [ ] Refactoring (code change that neither fixes bugs nor adds functionality)
+- [ ] Documentation
+- [ ] Configuration/CI
 
-## ¿Cómo se ha probado?
+## How has this been tested?
 
-- [ ] Tests unitarios
-- [ ] Tests de integración
-- [ ] Pruebas manuales
-- [ ] `python src/manage.py check` pasa sin errores
-- [ ] `ruff check .` pasa sin errores
+- [ ] Unit tests
+- [ ] Integration tests
+- [ ] Manual testing
+- [ ] `python src/manage.py check` passes without errors
+- [ ] `ruff check .` passes without errors
 
 ## Checklist
 
-- [ ] **Mi título de PR sigue el formato conventional commits**
-- [ ] Mi código sigue las convenciones del proyecto (Ruff)
-- [ ] He realizado una self-review de mi código
-- [ ] He comentado mi código en áreas difíciles de entender
-- [ ] He actualizado la documentación si es necesario
-- [ ] Mis cambios no generan nuevas advertencias
-- [ ] He agregado tests que prueban mi funcionalidad
-- [ ] Los tests nuevos y existentes pasan localmente
+- [ ] **My PR title follows the conventional commits format**
+- [ ] My code follows the project conventions (Ruff)
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code in hard-to-understand areas
+- [ ] I have updated documentation if necessary
+- [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my functionality
+- [ ] New and existing tests pass locally
 
-## Contexto adicional
+## Additional context
 
-Agregar cualquier contexto adicional sobre el PR aquí.
+Add any additional context about the PR here.
