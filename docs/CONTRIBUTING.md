@@ -1,88 +1,88 @@
-# Flujo de Trabajo con Pull Requests
+# Pull Request Workflow
 
-Este proyecto utiliza pull requests para todos los cambios a la rama `main`.
+This project uses pull requests for all changes to the `main` branch.
 
-## Proceso de Desarrollo
+## Development Process
 
-### 1. Crear una nueva rama
+### 1. Create a new branch
 ```bash
-git checkout -b feat/nombre-de-la-funcionalidad
-# o
-git checkout -b fix/descripcion-del-bug
+git checkout -b feat/feature-name
+# or
+git checkout -b fix/bug-description
 ```
 
-### 2. Realizar cambios y commits
+### 2. Make changes and commits
 ```bash
 git add .
-git commit -m "feat: agregar nueva funcionalidad"
+git commit -m "feat: add new functionality"
 ```
 
-Usar conventional commits:
-- `feat:` - Nueva funcionalidad
-- `fix:` - Corrección de bugs
-- `docs:` - Cambios en documentación
-- `style:` - Cambios de formato (no afectan funcionalidad)
-- `refactor:` - Refactoring de código
-- `test:` - Agregar o modificar tests
-- `chore:` - Tareas de mantenimiento
+Use conventional commits:
+- `feat:` - New functionality
+- `fix:` - Bug fixes
+- `docs:` - Documentation changes
+- `style:` - Formatting changes (don't affect functionality)
+- `refactor:` - Code refactoring
+- `test:` - Add or modify tests
+- `chore:` - Maintenance tasks
 
-### 3. Hacer push de la rama
+### 3. Push the branch
 ```bash
-git push origin feat/nombre-de-la-funcionalidad
+git push origin feat/feature-name
 ```
 
-### 4. Crear Pull Request
-- Ir a GitHub y crear un PR desde tu rama hacia `main`
-- **IMPORTANTE**: El título del PR debe seguir el formato conventional commits
-- Completar el template de PR con toda la información necesaria
-- Asegurarse de que todos los checks pasen
+### 4. Create Pull Request
+- Go to GitHub and create a PR from your branch to `main`
+- **IMPORTANT**: The PR title must follow the conventional commits format
+- Complete the PR template with all necessary information
+- Ensure all checks pass
 
-## Formato de Títulos de PR
+## PR Title Format
 
-Los títulos de Pull Request **DEBEN** seguir el formato conventional commits para que semantic-release funcione correctamente:
+Pull Request titles **MUST** follow the conventional commits format for semantic-release to work correctly:
 
-### **Formato requerido:**
+### **Required format:**
 ```
 type(scope): description
 ```
 
-### **Tipos válidos:**
-- `feat` - Nueva funcionalidad
-- `fix` - Corrección de bugs  
-- `docs` - Documentación
-- `style` - Formato/estilo de código
+### **Valid types:**
+- `feat` - New functionality
+- `fix` - Bug fixes  
+- `docs` - Documentation
+- `style` - Code formatting/style
 - `refactor` - Refactoring
-- `perf` - Mejoras de performance
+- `perf` - Performance improvements
 - `test` - Tests
-- `build` - Sistema de build
+- `build` - Build system
 - `ci` - CI/CD
-- `chore` - Tareas de mantenimiento
-- `revert` - Revertir cambios
+- `chore` - Maintenance tasks
+- `revert` - Revert changes
 
-### **Ejemplos de títulos válidos:**
+### **Examples of valid titles:**
 - ✅ `feat: add user authentication system`
 - ✅ `fix(auth): resolve login redirect issue` 
 - ✅ `docs: update API documentation`
 - ✅ `chore(deps): update dependencies to latest versions`
 - ✅ `perf: optimize database queries for hunt search`
 
-### **Ejemplos de títulos NO válidos:**
+### **Examples of INVALID titles:**
 - ❌ `Add user authentication` (no type)
-- ❌ `feat: Add user authentication` (descripción empieza con mayúscula)
-- ❌ `update docs` (no type, descripción muy corta)
+- ❌ `feat: Add user authentication` (description starts with uppercase)
+- ❌ `update docs` (no type, description too short)
 
-### **Reglas adicionales:**
-- La descripción debe empezar con minúscula
-- Longitud mínima: 10 caracteres
-- Longitud máxima: 120 caracteres
-- El scope es opcional pero recomendado
+### **Additional rules:**
+- Description must start with lowercase
+- Minimum length: 10 characters
+- Maximum length: 120 characters
+- Scope is optional but recommended
 
-### **Validación automática:**
-Si el título no cumple el formato, el PR será bloqueado y recibirás un comentario automático con instrucciones para corregirlo.
+### **Automatic validation:**
+If the title doesn't meet the format, the PR will be blocked and you'll receive an automatic comment with instructions to fix it.
 
-## Checks Automáticos
+## Automatic Checks
 
-Cada PR ejecuta automáticamente:
+Each PR automatically runs:
 
 ### Code Quality Check
 - ✅ Ruff linter (`ruff check .`)
@@ -90,45 +90,45 @@ Cada PR ejecuta automáticamente:
 - ✅ Django system check (`python src/manage.py check`)
 
 ### Django Tests  
-- ✅ Check de migraciones (`makemigrations --check`)
-- ✅ Tests de Django (`python src/manage.py test`)
-- ✅ Verificación de migraciones faltantes
+- ✅ Migration checks (`makemigrations --check`)
+- ✅ Django tests (`python src/manage.py test`)
+- ✅ Missing migrations verification
 
 ### PR Title Validation
-- ✅ Formato conventional commits
-- ✅ Tipos válidos de commit
-- ✅ Longitud apropiada del título
+- ✅ Conventional commits format
+- ✅ Valid commit types
+- ✅ Appropriate title length
 
-## Requisitos para Merge
+## Requirements for Merge
 
-Todos los checks deben pasar antes de hacer merge:
-- ✅ Code Quality Check exitoso
-- ✅ Django Tests exitoso
-- ✅ PR Title Validation exitoso
-- ✅ Review aprobado (si es requerido)
+All checks must pass before merging:
+- ✅ Code Quality Check successful
+- ✅ Django Tests successful
+- ✅ PR Title Validation successful
+- ✅ Review approved (if required)
 
 ## Semantic Release
 
-Una vez que el PR se mergea a `main`:
-- 🚀 Semantic-release ejecuta automáticamente basado en el título del PR
-- 📝 Genera CHANGELOG.md automáticamente
-- 🏷️ Crea tags de versión automáticamente
-- 📦 Actualiza la versión en `pyproject.toml`
+Once the PR is merged to `main`:
+- 🚀 Semantic-release runs automatically based on PR title
+- 📝 Generates CHANGELOG.md automatically
+- 🏷️ Creates version tags automatically
+- 📦 Updates version in `pyproject.toml`
 
-## Comandos Útiles para Desarrollo Local
+## Useful Commands for Local Development
 
 ```bash
-# Verificar calidad de código
+# Check code quality
 poetry run ruff check .
 poetry run ruff format --check .
 
-# Verificar Django
+# Check Django
 poetry run python src/manage.py check
 
-# Ejecutar tests
+# Run tests
 poetry run python src/manage.py test
 
-# Aplicar autofix de Ruff
+# Apply Ruff autofix
 poetry run ruff check . --fix
 poetry run ruff format .
 ```
