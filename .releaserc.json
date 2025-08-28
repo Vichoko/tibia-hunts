@@ -29,7 +29,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "sed 's/version = \"[^\"]*\"/version = \"${nextRelease.version}\"/' pyproject.toml > pyproject.toml.tmp && mv pyproject.toml.tmp pyproject.toml"
+        "prepareCmd": "sed 's/^version = \"[^\"]*\"/version = \"${nextRelease.version}\"/' pyproject.toml > pyproject.toml.tmp && mv pyproject.toml.tmp pyproject.toml"
       }
     ],
     [
