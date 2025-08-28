@@ -1,3 +1,16 @@
+# 1.0.0 (2025-08-28)
+
+
+### Bug Fixes
+
+* simplify semantic-release config to use defaults ([c3b8675](https://github.com/Vichoko/tibia-hunts/commit/c3b867563ac38d4b48665deb9f514712f419e461))
+* update semantic-release config to use sed instead of poetry ([ece2004](https://github.com/Vichoko/tibia-hunts/commit/ece2004fc87064b2df2d23dad20edaef09aa2fdf))
+
+
+### Features
+
+* add readme ([ba6774d](https://github.com/Vichoko/tibia-hunts/commit/ba6774da8d06b3add7fd6201037baca5662433ce))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
