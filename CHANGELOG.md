@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/Vichoko/tibia-hunts/compare/v1.1.1...v1.1.2) (2025-08-28)
+
+
+### Bug Fixes
+
+* correct ruff target-version and improve semantic-release sed pattern ([53fde98](https://github.com/Vichoko/tibia-hunts/commit/53fde98acc34058a68a0946cbf528e3caf170ad2))
+
 ## [1.1.1](https://github.com/Vichoko/tibia-hunts/compare/v1.1.0...v1.1.1) (2025-08-28)
 
 
