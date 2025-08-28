@@ -9,16 +9,8 @@ packages = [{include = "tibia_hunts"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.0"
-black = "^23.0"
-flake8 = "^6.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.semantic_release]
-version_toml = ["pyproject.toml:tool.poetry.version"]
-version_pattern = "pyproject.toml:version = \"{version}\""
-build_command = "poetry build"
