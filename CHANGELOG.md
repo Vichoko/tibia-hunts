@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Vichoko/tibia-hunts/compare/v1.0.1...v1.1.0) (2025-08-28)
+
+
+### Features
+
+* add ruff linter and formatter with strict rules ([2d4af81](https://github.com/Vichoko/tibia-hunts/commit/2d4af8136b6abdefd236e3626329704b386b795a))
+
 ## [1.0.1](https://github.com/Vichoko/tibia-hunts/compare/v1.0.0...v1.0.1) (2025-08-28)
 
 
