@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Vichoko/tibia-hunts/compare/v1.2.0...v1.3.0) (2025-08-28)
+
+
+### Features
+
+* add GitHub Actions workflows and PR process ([#1](https://github.com/Vichoko/tibia-hunts/issues/1)) ([6c7044a](https://github.com/Vichoko/tibia-hunts/commit/6c7044ac2997c038ace252ad2a3e7ec928245b60))
+
 # [1.2.0](https://github.com/Vichoko/tibia-hunts/compare/v1.1.2...v1.2.0) (2025-08-28)
 
 
