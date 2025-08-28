@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Vichoko/tibia-hunts/compare/v1.1.2...v1.2.0) (2025-08-28)
+
+
+### Features
+
+* reorganize project with src/ structure and Django 5.2 LTS ([9bf49f6](https://github.com/Vichoko/tibia-hunts/commit/9bf49f61a373a6fdd6e40067b86fac0546102218))
+
 ## [1.1.2](https://github.com/Vichoko/tibia-hunts/compare/v1.1.1...v1.1.2) (2025-08-28)
 
 
