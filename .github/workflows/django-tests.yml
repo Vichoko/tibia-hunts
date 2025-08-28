@@ -11,20 +11,6 @@ jobs:
     name: Django Tests
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test_tibia_hunts
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -54,15 +40,9 @@ jobs:
 
       - name: Run Django migrations check
         run: poetry run python src/manage.py makemigrations --check --dry-run
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_tibia_hunts
 
       - name: Run Django tests
         run: poetry run python src/manage.py test
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_tibia_hunts
 
       - name: Check for missing migrations
         run: poetry run python src/manage.py makemigrations --check
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_tibia_hunts
