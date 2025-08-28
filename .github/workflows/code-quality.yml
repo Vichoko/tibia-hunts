@@ -42,3 +42,9 @@ jobs:
 
       - name: Run Ruff formatter check
         run: poetry run ruff format --check .
+
+      - name: Run Django system check
+        run: poetry run python src/manage.py check
+
+      - name: Run Django check --deploy
+        run: poetry run python src/manage.py check --deploy --fail-level=WARNING

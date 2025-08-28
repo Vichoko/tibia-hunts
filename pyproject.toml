@@ -97,6 +97,14 @@ unfixable = []
     "ARG",   # unused function args in tests
     "S106",  # hardcoded passwords in tests
 ]
+"src/**/views.py" = [
+    "E501",  # Line too long (HTML content hardcodeado temporalmente)
+    "ARG001",  # Unused function argument (Django view pattern)
+    "S105",  # Possible hardcoded password (HTML content hardcodeado temporalmente)
+]
+"src/**/manage.py" = [
+    "TRY003",  # Long messages in manage.py are OK
+]
 
 # Configuración de isort
 [tool.ruff.lint.isort]
