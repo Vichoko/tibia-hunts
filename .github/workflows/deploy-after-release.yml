@@ -45,12 +45,14 @@ jobs:
         python-version: '3.11'
 
     - name: Cache Poetry installation
+      id: cache-poetry
       uses: actions/cache@v4
       with:
         path: ~/.local
         key: poetry-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install Poetry
+      if: steps.cache-poetry.outputs.cache-hit != 'true'
       uses: snok/install-poetry@v1
       with:
         version: latest
@@ -58,13 +60,15 @@ jobs:
         virtualenvs-in-project: true
 
     - name: Cache Poetry dependencies
+      id: cache-deps
       uses: actions/cache@v4
       with:
         path: .venv
         key: poetry-venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install dependencies
-      run: poetry install --no-interaction --no-dev
+      if: steps.cache-deps.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction --only=main
 
     - name: Export requirements.txt
       run: poetry export -f requirements.txt --output requirements.txt --without-hashes
