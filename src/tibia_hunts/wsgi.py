@@ -12,10 +12,10 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 
-# Use production settings when running on Google App Engine
+# Use cloud settings when running on Google App Engine
 if os.getenv("GAE_APPLICATION", None):
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tibia_hunts.settings_production")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tibia_hunts.settings.cloud")
 else:
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tibia_hunts.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tibia_hunts.settings.local")
 
 application = get_wsgi_application()
