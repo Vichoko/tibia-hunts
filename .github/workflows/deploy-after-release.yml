@@ -1,13 +1,17 @@
-name: Deploy to Google App Engine
+name: Deploy after Release
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch: # Allow manual deployment
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy (e.g., v1.5.0)'
+        required: true
+        type: string
 
 env:
   PROJECT_ID: tibia-hunts-app
-  GAE_APPLICATION: tibia-hunts-app
 
 jobs:
   deploy:
@@ -18,6 +22,22 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        # Use the release tag if triggered by release, otherwise use main
+        ref: ${{ github.event.release.tag_name || 'main' }}
+
+    - name: Set deployment version
+      id: version
+      run: |
+        if [ "${{ github.event_name }}" == "release" ]; then
+          VERSION="${{ github.event.release.tag_name }}"
+        else
+          VERSION="${{ github.event.inputs.version }}"
+        fi
+        # Remove 'v' prefix if present and ensure it's valid for App Engine
+        CLEAN_VERSION=$(echo $VERSION | sed 's/^v//' | sed 's/[^a-zA-Z0-9-]/-/g')
+        echo "version=${CLEAN_VERSION}" >> $GITHUB_OUTPUT
+        echo "🏷️ Deploying version: ${CLEAN_VERSION}"
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -69,22 +89,17 @@ jobs:
       with:
         project_id: ${{ env.PROJECT_ID }}
 
-    - name: Deploy to App Engine
+    - name: Deploy to App Engine with semantic version
       run: |
-        # Replace SECRET_KEY placeholder in app.yaml with actual secret
+        # Replace SECRET_KEY placeholder with actual secret
         sed -i "s/\${SECRET_KEY}/${{ secrets.DJANGO_SECRET_KEY }}/g" app.yaml
 
-        # Deploy to App Engine using the existing app.yaml
-        gcloud app deploy --quiet --no-cache
+        # Deploy to App Engine with semantic release version
+        gcloud app deploy --quiet --no-cache --version=${{ steps.version.outputs.version }}
 
     - name: Get deployment URL
       run: |
         echo "🚀 Deployment successful!"
         echo "📱 Application URL: https://${{ env.PROJECT_ID }}.uc.r.appspot.com"
-
-    - name: Post deployment verification
-      run: |
-        # Wait a bit for deployment to be ready
-        sleep 30
-        # Check if the app is responding
-        curl -f -s -o /dev/null https://${{ env.PROJECT_ID }}.uc.r.appspot.com || echo "⚠️ App might still be starting up"
+        echo "🏷️ Version deployed: ${{ steps.version.outputs.version }}"
+        echo "🔗 Versioned URL: https://${{ steps.version.outputs.version }}-dot-${{ env.PROJECT_ID }}.uc.r.appspot.com"
