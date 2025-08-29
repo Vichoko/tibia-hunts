@@ -1,3 +1,13 @@
+## [1.5.4](https://github.com/Vichoko/tibia-hunts/compare/v1.5.3...v1.5.4) (2025-08-29)
+
+
+### Bug Fixes
+
+* remove npm cache from release workflow to resolve lock file error ([#19](https://github.com/Vichoko/tibia-hunts/issues/19)) ([74101d7](https://github.com/Vichoko/tibia-hunts/commit/74101d7ad6ef8e3f000a41f81e7fc5d3e7a60c44))
+* resolve npm cache error by reordering package.json creation ([#18](https://github.com/Vichoko/tibia-hunts/issues/18)) ([10269ca](https://github.com/Vichoko/tibia-hunts/commit/10269ca929f1380f25f72d0979e4ca2f7150c90a))
+* resolve semantic-release cache issue by switching to local insta… ([#17](https://github.com/Vichoko/tibia-hunts/issues/17)) ([c0cb1a8](https://github.com/Vichoko/tibia-hunts/commit/c0cb1a88dbc82d58fa1ba3daeea72fe1f91d9e83))
+* split settings in two ([#15](https://github.com/Vichoko/tibia-hunts/issues/15)) ([02d64c1](https://github.com/Vichoko/tibia-hunts/commit/02d64c180857c4d3b2f186132bec6b9ad0e50b32))
+
 ## [1.5.3](https://github.com/Vichoko/tibia-hunts/compare/v1.5.2...v1.5.3) (2025-08-29)
 
 

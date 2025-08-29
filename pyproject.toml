@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tibia-hunts"
-version = "1.5.3"
+version = "1.5.4"
 description = ""
 authors = ["vichoko <vicenteoyanedel@gmail.com>"]
 readme = "README.md"
