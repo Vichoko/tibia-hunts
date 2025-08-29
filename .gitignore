@@ -139,6 +139,9 @@ github-actions-key.json
 # Static files collected for deployment
 static/
 
+# Generated requirements.txt (should be generated from poetry.lock)
+requirements.txt
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
