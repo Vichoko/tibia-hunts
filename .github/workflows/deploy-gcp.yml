@@ -71,43 +71,10 @@ jobs:
 
     - name: Deploy to App Engine
       run: |
-        # Create app.yaml with production secrets
-        cat > app.yaml << EOF
-        runtime: python311
+        # Replace SECRET_KEY placeholder in app.yaml with actual secret
+        sed -i "s/\${SECRET_KEY}/${{ secrets.DJANGO_SECRET_KEY }}/g" app.yaml
 
-        # Cost optimization settings
-        automatic_scaling:
-          min_instances: 0  # Scale to zero when no traffic
-          max_instances: 1  # Limit to 1 instance max to control costs
-          target_cpu_utilization: 0.8  # Higher threshold to reduce scaling
-          max_concurrent_requests: 80  # Handle more requests per instance
-
-        # Resource allocation for cost efficiency
-        resources:
-          cpu: 1
-          memory_gb: 0.5  # Minimum memory allocation
-          disk_size_gb: 10  # Minimum disk size
-
-        env_variables:
-          GOOGLE_CLOUD_PROJECT: "${{ env.PROJECT_ID }}"
-          DATABASE_URL: "sqlite:///db.sqlite3"
-          SECRET_KEY: "${{ secrets.DJANGO_SECRET_KEY }}"
-          DEBUG: "False"
-
-        handlers:
-        # This configures Google App Engine to serve the files in the app's static
-        # directory.
-        - url: /static
-          static_dir: static/
-          # Cache static files for 1 hour to reduce requests
-          expiration: "1h"
-
-        # This handler routes all requests not caught above to your main app.
-        - url: /.*
-          script: auto
-        EOF
-
-        # Deploy to App Engine
+        # Deploy to App Engine using the existing app.yaml
         gcloud app deploy --quiet --no-cache
 
     - name: Get deployment URL

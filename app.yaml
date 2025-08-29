@@ -17,7 +17,7 @@ env_variables:
   # This setting is used in production
   GOOGLE_CLOUD_PROJECT: "tibia-hunts-app"
   DATABASE_URL: "sqlite:///db.sqlite3"
-  SECRET_KEY: "!5$v&5^vn4cplg5$siebf9laq&41s^gha!n^jq2e#ta6=x0tlu"
+  SECRET_KEY: "${SECRET_KEY}"  # Will be replaced during deployment
   DEBUG: "False"
 
 handlers:
