@@ -1,3 +1,11 @@
+## [1.5.3](https://github.com/Vichoko/tibia-hunts/compare/v1.5.2...v1.5.3) (2025-08-29)
+
+
+### Bug Fixes
+
+* correct semantic-release cache to include globally installed plu… ([#14](https://github.com/Vichoko/tibia-hunts/issues/14)) ([8022440](https://github.com/Vichoko/tibia-hunts/commit/80224405128ab162988834a7c87aaa11c727c11d))
+* resolve poetry export command not found error ([#13](https://github.com/Vichoko/tibia-hunts/issues/13)) ([9ff029e](https://github.com/Vichoko/tibia-hunts/commit/9ff029e5a4375c1e843b6f2da6e338b24e4c4969))
+
 ## [1.5.2](https://github.com/Vichoko/tibia-hunts/compare/v1.5.1...v1.5.2) (2025-08-29)
 
 
