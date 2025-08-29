@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/Vichoko/tibia-hunts/compare/v1.5.0...v1.5.1) (2025-08-29)
+
+
+### Bug Fixes
+
+* integrate deployment with semantic release ([#9](https://github.com/Vichoko/tibia-hunts/issues/9)) ([b9bcb75](https://github.com/Vichoko/tibia-hunts/commit/b9bcb7502cc143aa259ce64ba0b6ff857aa4fc02))
+
 # [1.5.0](https://github.com/Vichoko/tibia-hunts/compare/v1.4.1...v1.5.0) (2025-08-29)
 
 
