@@ -12,6 +12,10 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tibia_hunts.settings")
+# Use production settings when running on Google App Engine
+if os.getenv("GAE_APPLICATION", None):
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tibia_hunts.settings_production")
+else:
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tibia_hunts.settings")
 
 application = get_wsgi_application()

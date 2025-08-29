@@ -1,0 +1,90 @@
+name: Deploy to Google App Engine
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Allow manual deployment
+
+env:
+  PROJECT_ID: tibia-hunts-app
+  GAE_APPLICATION: tibia-hunts-app
+
+jobs:
+  deploy:
+    name: Deploy to App Engine
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Cache Poetry installation
+      uses: actions/cache@v4
+      with:
+        path: ~/.local
+        key: poetry-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: latest
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Cache Poetry dependencies
+      uses: actions/cache@v4
+      with:
+        path: .venv
+        key: poetry-venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+    - name: Install dependencies
+      run: poetry install --no-interaction --no-dev
+
+    - name: Export requirements.txt
+      run: poetry export -f requirements.txt --output requirements.txt --without-hashes
+
+    - name: Collect static files
+      run: poetry run python src/manage.py collectstatic --noinput --settings=tibia_hunts.settings_production
+      env:
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
+    - name: Run Django checks
+      run: poetry run python src/manage.py check --deploy --settings=tibia_hunts.settings_production
+      env:
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+
+    - name: Deploy to App Engine
+      run: |
+        # Replace SECRET_KEY placeholder in app.yaml with actual secret
+        sed -i "s/\${SECRET_KEY}/${{ secrets.DJANGO_SECRET_KEY }}/g" app.yaml
+
+        # Deploy to App Engine using the existing app.yaml
+        gcloud app deploy --quiet --no-cache
+
+    - name: Get deployment URL
+      run: |
+        echo "🚀 Deployment successful!"
+        echo "📱 Application URL: https://${{ env.PROJECT_ID }}.uc.r.appspot.com"
+
+    - name: Post deployment verification
+      run: |
+        # Wait a bit for deployment to be ready
+        sleep 30
+        # Check if the app is responding
+        curl -f -s -o /dev/null https://${{ env.PROJECT_ID }}.uc.r.appspot.com || echo "⚠️ App might still be starting up"

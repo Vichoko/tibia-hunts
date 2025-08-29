@@ -1,0 +1,33 @@
+runtime: python311
+
+# Cost optimization settings
+automatic_scaling:
+  min_instances: 0  # Scale to zero when no traffic
+  max_instances: 1  # Limit to 1 instance max to control costs
+  target_cpu_utilization: 0.8  # Higher threshold to reduce scaling
+  max_concurrent_requests: 80  # Handle more requests per instance
+
+# Resource allocation for cost efficiency
+resources:
+  cpu: 1
+  memory_gb: 0.5  # Minimum memory allocation
+  disk_size_gb: 10  # Minimum disk size
+
+env_variables:
+  # This setting is used in production
+  GOOGLE_CLOUD_PROJECT: "tibia-hunts-app"
+  DATABASE_URL: "sqlite:///db.sqlite3"
+  SECRET_KEY: "${SECRET_KEY}"  # Will be replaced during deployment
+  DEBUG: "False"
+
+handlers:
+# This configures Google App Engine to serve the files in the app's static
+# directory.
+- url: /static
+  static_dir: static/
+  # Cache static files for 1 hour to reduce requests
+  expiration: "1h"
+
+# This handler routes all requests not caught above to your main app.
+- url: /.*
+  script: auto
