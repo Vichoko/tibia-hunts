@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/Vichoko/tibia-hunts/compare/v1.5.4...v1.6.0) (2025-08-29)
+
+
+### Features
+
+* implement robust semantic-release cache using actions/cache ([#20](https://github.com/Vichoko/tibia-hunts/issues/20)) ([3113af7](https://github.com/Vichoko/tibia-hunts/commit/3113af7d2a0466132198d09b0d74153829f8697e))
+
 ## [1.5.4](https://github.com/Vichoko/tibia-hunts/compare/v1.5.3...v1.5.4) (2025-08-29)
 
 
