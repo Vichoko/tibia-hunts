@@ -28,27 +28,26 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 'lts/*'
+        cache: 'npm'
 
-    # Cache semantic-release and all its plugins globally installed
-    # NOTE: If you change the plugin versions in the install step below,
-    # you need to manually invalidate this cache by changing the cache key
-    # (e.g., add a version suffix like semantic-release-v2-${{ runner.os }})
-    - name: Cache semantic-release installation
-      id: cache-semantic-release
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.npm
-          /usr/local/lib/node_modules/semantic-release
-          /usr/local/lib/node_modules/@semantic-release
-        key: semantic-release-v1-${{ runner.os }}
-        restore-keys: |
-          semantic-release-v1-${{ runner.os }}
+    # Create package.json for semantic-release dependencies
+    - name: Create package.json for semantic-release
+      run: |
+        echo '{
+          "name": "semantic-release-deps",
+          "private": true,
+          "dependencies": {
+            "semantic-release": "^21",
+            "@semantic-release/changelog": "^6",
+            "@semantic-release/git": "^10",
+            "@semantic-release/github": "^9",
+            "@semantic-release/exec": "^6",
+            "conventional-changelog-conventionalcommits": "^7"
+          }
+        }' > package.json
 
     - name: Install semantic-release and plugins
-      if: steps.cache-semantic-release.outputs.cache-hit != 'true'
-      run: |
-        npm install -g semantic-release@21 @semantic-release/changelog@6 @semantic-release/git@10 @semantic-release/github@9 @semantic-release/exec@6 conventional-changelog-conventionalcommits@7
+      run: npm install
 
     - name: Release
       env:
