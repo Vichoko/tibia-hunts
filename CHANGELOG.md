@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/Vichoko/tibia-hunts/compare/v1.4.1...v1.5.0) (2025-08-29)
+
+
+### Bug Fixes
+
+* add semantic-release workflow to bypass branch protection ([#7](https://github.com/Vichoko/tibia-hunts/issues/7)) ([bae83dc](https://github.com/Vichoko/tibia-hunts/commit/bae83dcd844aae9dce67512414c6f5c8e76ce7d3))
+
+
+### Features
+
+* add Google App Engine deployment automation with cost optimization ([#5](https://github.com/Vichoko/tibia-hunts/issues/5)) ([16c6ebb](https://github.com/Vichoko/tibia-hunts/commit/16c6ebb8541d18d2d3eddbdb1252015ffb989659))
+
 ## [1.4.1](https://github.com/Vichoko/tibia-hunts/compare/v1.4.0...v1.4.1) (2025-08-28)
 
 # [1.4.0](https://github.com/Vichoko/tibia-hunts/compare/v1.3.0...v1.4.0) (2025-08-28)
