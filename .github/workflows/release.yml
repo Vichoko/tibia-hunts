@@ -24,7 +24,12 @@ jobs:
         # Use a PAT that can bypass branch protection rules
         token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
 
-    # Create package.json for semantic-release dependencies first
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts/*'
+
+    # Create package.json for semantic-release dependencies
     - name: Create package.json for semantic-release
       run: |
         echo '{
@@ -40,13 +45,18 @@ jobs:
           }
         }' > package.json
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    # Cache semantic-release node_modules directly
+    - name: Cache semantic-release dependencies
+      id: cache-semantic-release
+      uses: actions/cache@v4
       with:
-        node-version: 'lts/*'
-        cache: 'npm'
+        path: node_modules
+        key: semantic-release-${{ runner.os }}-${{ hashFiles('package.json') }}
+        restore-keys: |
+          semantic-release-${{ runner.os }}-
 
     - name: Install semantic-release and plugins
+      if: steps.cache-semantic-release.outputs.cache-hit != 'true'
       run: npm install
 
     - name: Release
