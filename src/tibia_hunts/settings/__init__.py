@@ -16,4 +16,3 @@ Or in Windows:
     $env:DJANGO_SETTINGS_MODULE='tibia_hunts.settings.cloud'
     python manage.py runserver
 """
-

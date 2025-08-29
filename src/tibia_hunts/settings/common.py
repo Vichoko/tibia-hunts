@@ -4,8 +4,8 @@ Common settings for tibia_hunts project.
 This module contains settings shared across all environments.
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -13,8 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    'SECRET_KEY',
-    "django-insecure-r48^0v53p6ue9(uy$+47yc3a8x4f+h5&m#at!*g@1a8pqfn+w2"
+    "SECRET_KEY", "django-insecure-r48^0v53p6ue9(uy$+47yc3a8x4f+h5&m#at!*g@1a8pqfn+w2"
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -73,7 +72,7 @@ DATABASES = {
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -104,22 +103,22 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Disable caching in development
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    "default": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
     }
 }
 
 # Logging configuration
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'INFO',
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
     },
 }

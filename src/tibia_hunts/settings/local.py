@@ -3,7 +3,9 @@ Local development settings for tibia_hunts project.
 """
 
 import logging
-from .common import *
+
+from .common import *  # noqa: F403
+
 
 # Print which settings module is being used
 logger = logging.getLogger(__name__)
