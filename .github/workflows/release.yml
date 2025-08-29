@@ -28,16 +28,15 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 'lts/*'
-        cache: 'npm'
 
     - name: Cache semantic-release installation
       id: cache-semantic-release
       uses: actions/cache@v4
       with:
         path: ~/.npm
-        key: semantic-release-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+        key: semantic-release-${{ runner.os }}
         restore-keys: |
-          semantic-release-${{ runner.os }}-
+          semantic-release-${{ runner.os }}
 
     - name: Install semantic-release
       if: steps.cache-semantic-release.outputs.cache-hit != 'true'
