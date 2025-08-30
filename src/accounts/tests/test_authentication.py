@@ -1,12 +1,28 @@
+"""
+Test suite for authentication functionality and API endpoints.
+
+This module contains tests for:
+- User authentication API endpoints (/api/me)
+- Home page rendering for different user states
+- Google OAuth integration flow
+"""
+
 from django.test import TestCase, Client
-from django.urls import reverse
 from django.contrib.auth.models import User
 from accounts.models import Profile
 import json
 
 
 class AuthenticationTestCase(TestCase):
+    """
+    Test case for user authentication functionality.
+
+    Tests API endpoints, profile creation, and view rendering
+    for both authenticated and anonymous users.
+    """
+
     def setUp(self):
+        """Set up test client for HTTP requests."""
         self.client = Client()
 
     def test_home_page_shows_signin_for_anonymous_user(self):

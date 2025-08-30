@@ -1,3 +1,11 @@
+"""
+Django management command for cleaning up duplicate Google OAuth applications.
+
+This command removes duplicate SocialApp entries for Google OAuth and ensures
+a clean, single configuration to prevent MultipleObjectsReturned errors
+in django-allauth.
+"""
+
 import os
 from django.core.management.base import BaseCommand
 from django.contrib.sites.models import Site
@@ -5,9 +13,27 @@ from allauth.socialaccount.models import SocialApp
 
 
 class Command(BaseCommand):
+    """
+    Management command to clean up duplicate Google OAuth apps.
+
+    Removes all existing Google OAuth SocialApp entries and creates a single
+    clean configuration with credentials from environment variables.
+    """
+
     help = 'Clean up duplicate Google OAuth apps and configure a single one'
+    """Help text displayed when running python manage.py help cleanup_oauth."""
 
     def handle(self, *args, **options):
+        """
+        Execute the OAuth cleanup command.
+
+        Deletes all existing Google OAuth SocialApp entries and creates
+        a single clean configuration to prevent conflicts.
+
+        Args:
+            *args: Positional arguments passed to the command.
+            **options: Keyword arguments passed to the command.
+        """
         # Get credentials from environment variables
         client_id = os.environ.get('GOOGLE_CLIENT_ID')
         client_secret = os.environ.get('GOOGLE_CLIENT_SECRET')

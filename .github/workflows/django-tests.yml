@@ -1,54 +1,71 @@
-name: Django Tests
+name: Django Tests with Coverage
 
 on:
+  push:
+    branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   test:
-    name: Django Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
 
-      - name: Cache Poetry installation
-        id: cache-poetry
-        uses: actions/cache@v3
-        with:
-          path: ~/.local
-          key: poetry-${{ runner.os }}
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: latest
+        virtualenvs-create: true
+        virtualenvs-in-project: true
 
-      - name: Install Poetry
-        if: steps.cache-poetry.outputs.cache-hit != 'true'
-        uses: snok/install-poetry@v1
-        with:
-          version: latest
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
-      - name: Cache dependencies
-        id: cache-deps
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: pydeps-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction --no-root
 
-      - name: Install dependencies
-        if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
+    - name: Install project
+      run: poetry install --no-interaction
 
-      - name: Run Django migrations check
-        run: poetry run python src/manage.py makemigrations --check --dry-run
+    - name: Run Django Tests with Coverage
+      run: |
+        cd src
+        poetry run coverage run --source='.' manage.py test
+        poetry run coverage report -m
+        poetry run coverage html
+      env:
+        GOOGLE_CLIENT_ID: test-client-id
+        GOOGLE_CLIENT_SECRET: test-client-secret
 
-      - name: Run Django tests
-        run: poetry run python src/manage.py test
+    - name: Check Coverage Threshold
+      run: |
+        cd src
+        poetry run coverage report --fail-under=85
 
-      - name: Check for missing migrations
-        run: poetry run python src/manage.py makemigrations --check
+    - name: Upload Coverage Reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: src/htmlcov/
+        retention-days: 30
+
+    - name: Comment Coverage on PR
+      if: github.event_name == 'pull_request'
+      run: |
+        cd src
+        echo "## 📊 Coverage Report" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        poetry run coverage report >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

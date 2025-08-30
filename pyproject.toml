@@ -16,6 +16,7 @@ cryptography = "^45.0.6"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.0"
+coverage = "^7.10.6"
 
 [build-system]
 requires = ["poetry-core"]
