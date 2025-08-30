@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Vichoko/tibia-hunts/compare/v1.6.0...v1.6.1) (2025-08-30)
+
+
+### Bug Fixes
+
+* remove hardcoded settings production ([#21](https://github.com/Vichoko/tibia-hunts/issues/21)) ([8f68643](https://github.com/Vichoko/tibia-hunts/commit/8f686433e03b1232f23b797a4cfff560b261d066))
+
 # [1.6.0](https://github.com/Vichoko/tibia-hunts/compare/v1.5.4...v1.6.0) (2025-08-29)
 
 
