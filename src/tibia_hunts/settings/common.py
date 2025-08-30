@@ -164,11 +164,8 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 # Google OAuth provider configuration
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
-        "APP": {
-            "client_id": os.environ.get("GOOGLE_CLIENT_ID", ""),
-            "secret": os.environ.get("GOOGLE_CLIENT_SECRET", ""),
-            "key": ""
-        },
+        # Remove APP configuration to avoid conflicts with database setup
+        # Credentials are now configured in the database via SocialApp model
         "SCOPE": ["profile", "email"],
         "AUTH_PARAMS": {"access_type": "online"},
     }

@@ -165,7 +165,7 @@ poetry.toml
 pyrightconfig.json
 
 # Environment variables
-.env
+.env*
 
 # Django
 db.sqlite3
