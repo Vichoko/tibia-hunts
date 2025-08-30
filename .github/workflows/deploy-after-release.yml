@@ -83,12 +83,12 @@ jobs:
         fi
 
     - name: Collect static files
-      run: poetry run python src/manage.py collectstatic --noinput --settings=tibia_hunts.settings_production
+      run: poetry run python src/manage.py collectstatic --noinput
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
     - name: Run Django checks
-      run: poetry run python src/manage.py check --deploy --settings=tibia_hunts.settings_production
+      run: poetry run python src/manage.py check --deploy
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
