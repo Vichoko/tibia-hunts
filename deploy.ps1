@@ -15,11 +15,11 @@ poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # Collect static files
 Write-Host "🎨 Collecting static files..." -ForegroundColor Yellow
-poetry run python src/manage.py collectstatic --noinput --settings=tibia_hunts.settings_production
+poetry run python src/manage.py collectstatic --noinput
 
 # Run Django checks
 Write-Host "🔍 Running Django checks..." -ForegroundColor Yellow
-poetry run python src/manage.py check --deploy --settings=tibia_hunts.settings_production
+poetry run python src/manage.py check --deploy
 
 # Deploy to App Engine
 Write-Host "☁️ Deploying to Google App Engine..." -ForegroundColor Blue

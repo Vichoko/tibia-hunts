@@ -17,11 +17,11 @@ poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # Collect static files
 echo "🎨 Collecting static files..."
-poetry run python src/manage.py collectstatic --noinput --settings=tibia_hunts.settings_production
+poetry run python src/manage.py collectstatic --noinput
 
 # Run Django checks
 echo "🔍 Running Django checks..."
-poetry run python src/manage.py check --deploy --settings=tibia_hunts.settings_production
+poetry run python src/manage.py check --deploy
 
 # Deploy to App Engine
 echo "☁️ Deploying to Google App Engine..."

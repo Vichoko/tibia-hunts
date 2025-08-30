@@ -75,10 +75,10 @@ chmod +x deploy.sh
 poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # Collect static files
-poetry run python src/manage.py collectstatic --noinput --settings=tibia_hunts.settings_production
+poetry run python src/manage.py collectstatic --noinput
 
 # Run checks
-poetry run python src/manage.py check --deploy --settings=tibia_hunts.settings_production
+poetry run python src/manage.py check --deploy
 
 # Deploy
 gcloud app deploy
@@ -128,7 +128,7 @@ gcloud app logs read --limit=50
 - The current configuration uses environment variables for secrets
 - Update `ALLOWED_HOSTS` in production settings to be more specific
 - Current setup is secure for small applications
-- Review all security settings in `settings_production.py`
+- Review all security settings in your Django settings configuration
 
 ## Performance Monitoring
 
