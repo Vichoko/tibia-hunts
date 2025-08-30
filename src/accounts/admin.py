@@ -6,6 +6,7 @@ providing an intuitive interface for managing user profiles and authentication d
 """
 
 from django.contrib import admin
+
 from .models import Profile
 
 

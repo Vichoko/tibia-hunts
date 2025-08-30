@@ -7,10 +7,12 @@ This module contains tests for:
 - Google OAuth integration flow
 """
 
-from django.test import TestCase, Client
-from django.contrib.auth.models import User
-from accounts.models import Profile
 import json
+
+from django.contrib.auth.models import User
+from django.test import Client, TestCase
+
+from accounts.models import Profile
 
 
 class AuthenticationTestCase(TestCase):
@@ -27,66 +29,68 @@ class AuthenticationTestCase(TestCase):
 
     def test_home_page_shows_signin_for_anonymous_user(self):
         """Test that home page shows 'Sign in with Google' for anonymous users"""
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Sign in with Google')
-        self.assertContains(response, '/accounts/google/login/')
+        response = self.client.get("/")
+        assert response.status_code == 200
+        self.assertContains(response, "Sign in with Google")
+        self.assertContains(response, "/accounts/google/login/")
 
     def test_api_me_returns_false_for_anonymous_user(self):
         """Test that /api/me returns authenticated: false for anonymous users"""
-        response = self.client.get('/api/me')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'application/json')
+        response = self.client.get("/api/me")
+        assert response.status_code == 200
+        assert response["Content-Type"] == "application/json"
 
         data = json.loads(response.content)
-        self.assertEqual(data['authenticated'], False)
-        self.assertIsNone(data['user'])
+        assert data["authenticated"] is False
+        assert data["user"] is None
 
     def test_profile_auto_creation_on_user_creation(self):
         """Test that Profile is automatically created when User is created"""
-        user = User.objects.create_user(username='testuser', email='test@example.com')
+        user = User.objects.create_user(username="testuser", email="test@example.com")
 
         # Profile should be created automatically via signals
-        self.assertTrue(hasattr(user, 'profile'))
+        assert hasattr(user, "profile")
         profile = Profile.objects.get(user=user)
-        self.assertEqual(profile.user, user)
-        self.assertEqual(str(profile), 'testuser')  # display_name is empty, so returns username
+        assert profile.user == user
+        assert str(profile) == "testuser"  # display_name is empty, so returns username
 
     def test_api_me_returns_user_data_for_authenticated_user(self):
         """Test that /api/me returns user data for authenticated users"""
-        user = User.objects.create_user(username='testuser', email='test@example.com')
+        user = User.objects.create_user(username="testuser", email="test@example.com")
         profile = user.profile
-        profile.display_name = 'Test User'
-        profile.avatar_url = 'https://example.com/avatar.jpg'
+        profile.display_name = "Test User"
+        profile.avatar_url = "https://example.com/avatar.jpg"
         profile.save()
 
         # Login the user
         self.client.force_login(user)
 
-        response = self.client.get('/api/me')
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get("/api/me")
+        assert response.status_code == 200
 
         data = json.loads(response.content)
-        self.assertEqual(data['authenticated'], True)
-        self.assertEqual(data['user']['id'], user.id)
-        self.assertEqual(data['user']['email'], 'test@example.com')
-        self.assertEqual(data['user']['display_name'], 'Test User')
-        self.assertEqual(data['user']['avatar_url'], 'https://example.com/avatar.jpg')
+        assert data["authenticated"] is True
+        assert data["user"]["id"] == user.id
+        assert data["user"]["email"] == "test@example.com"
+        assert data["user"]["display_name"] == "Test User"
+        assert data["user"]["avatar_url"] == "https://example.com/avatar.jpg"
 
     def test_home_page_shows_user_info_for_authenticated_user(self):
-        """Test that home page shows user info and logout link for authenticated users"""
-        user = User.objects.create_user(username='testuser', email='test@example.com')
+        """
+        Test that home page shows user info and logout link for authenticated users.
+        """
+        user = User.objects.create_user(username="testuser", email="test@example.com")
         profile = user.profile
-        profile.display_name = 'Test User'
+        profile.display_name = "Test User"
         profile.save()
 
         # Login the user
         self.client.force_login(user)
 
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'You\'re signed in as')
-        self.assertContains(response, 'Test User')
-        self.assertContains(response, '/accounts/logout/')
-        self.assertContains(response, '/api/me')
-        self.assertNotContains(response, 'Sign in with Google')
+        response = self.client.get("/")
+        assert response.status_code == 200
+        self.assertContains(response, "You're signed in as")
+        self.assertContains(response, "Test User")
+        self.assertContains(response, "/accounts/logout/")
+        self.assertContains(response, "/api/me")
+        self.assertNotContains(response, "Sign in with Google")

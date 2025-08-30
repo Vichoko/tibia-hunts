@@ -7,6 +7,7 @@ This module contains settings shared across all environments.
 import os
 from pathlib import Path
 
+
 # Load environment variables from .env file
 try:
     from dotenv import load_dotenv
