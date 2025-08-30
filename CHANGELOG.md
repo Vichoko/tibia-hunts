@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/Vichoko/tibia-hunts/compare/v1.6.2...v1.6.3) (2025-08-30)
+
+
+### Bug Fixes
+
+* optimize Google Cloud SDK setup with caching ([#22](https://github.com/Vichoko/tibia-hunts/issues/22)) ([0ce892d](https://github.com/Vichoko/tibia-hunts/commit/0ce892dc8c7b7578e71db1cc9f592fb844de9ef3))
+
 ## [1.6.2](https://github.com/Vichoko/tibia-hunts/compare/v1.6.1...v1.6.2) (2025-08-30)
 
 ## [1.6.1](https://github.com/Vichoko/tibia-hunts/compare/v1.6.0...v1.6.1) (2025-08-30)
