@@ -97,10 +97,31 @@ jobs:
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
 
+    - name: Cache Google Cloud SDK
+      id: cache-gcloud
+      uses: actions/cache@v4
+      with:
+        path: |
+          /opt/google-cloud-sdk
+          ~/.config/gcloud
+        key: gcloud-sdk-${{ runner.os }}-${{ hashFiles('.github/workflows/deploy-after-release.yml') }}
+        restore-keys: |
+          gcloud-sdk-${{ runner.os }}-
+
     - name: Set up Cloud SDK
+      if: steps.cache-gcloud.outputs.cache-hit != 'true'
       uses: google-github-actions/setup-gcloud@v2
       with:
         project_id: ${{ env.PROJECT_ID }}
+
+    # Configure gcloud if restored from cache
+    - name: Configure gcloud from cache
+      if: steps.cache-gcloud.outputs.cache-hit == 'true'
+      run: |
+        echo "🔄 Configuring gcloud from cache..."
+        export PATH="/opt/google-cloud-sdk/bin:$PATH"
+        gcloud config set project ${{ env.PROJECT_ID }}
+        echo "✅ gcloud configured from cache"
 
     - name: Deploy to App Engine with semantic version
       run: |
