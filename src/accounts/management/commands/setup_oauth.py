@@ -52,8 +52,7 @@ class Command(BaseCommand):
 
         # Get or create the default site
         site, created = Site.objects.get_or_create(
-            pk=1,
-            defaults={"domain": "localhost:8000", "name": "TibiaHunts Local"}
+            pk=1, defaults={"domain": "localhost:8000", "name": "TibiaHunts Local"}
         )
 
         if created:

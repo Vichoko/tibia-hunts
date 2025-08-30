@@ -17,7 +17,7 @@ User = get_user_model()
 
 
 @receiver(post_save, sender=User)
-def create_profile(_sender, instance, created, **_kwargs):
+def create_profile(sender, instance, created, **kwargs):  # noqa: ARG001
     """
     Automatically create a Profile when a new User is created.
 
@@ -25,10 +25,10 @@ def create_profile(_sender, instance, created, **_kwargs):
     maintaining the one-to-one relationship between User and Profile models.
 
     Args:
-        _sender: The model class that sent the signal (User) - unused.
+        sender: The model class that sent the signal (User).
         instance: The actual instance being saved.
         created (bool): True if a new record was created.
-        **_kwargs: Additional keyword arguments from the signal - unused.
+        **kwargs: Additional keyword arguments from the signal.
     """
     if created:
         Profile.objects.create(user=instance)
