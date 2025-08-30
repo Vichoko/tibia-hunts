@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Home</title></head>
+  <body>
+    {% if user.is_authenticated %}
+      <p>You're signed in as <strong>{{ display_name }}</strong>.</p>
+      <p><a href="/accounts/logout/">Log out</a></p>
+      <p>Try the API: <a href="/api/me">/api/me</a></p>
+    {% else %}
+      <a href="/accounts/google/login/">Sign in with Google</a>
+    {% endif %}
+  </body>
+</html>
+

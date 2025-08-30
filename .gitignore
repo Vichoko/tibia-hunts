@@ -164,5 +164,19 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+# Environment variables
+.env
+
+# Django
+db.sqlite3
+*.log
+local_settings.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
 # End of https://www.toptal.com/developers/gitignore/api/python
 !/.github/copilot-instructions.md
