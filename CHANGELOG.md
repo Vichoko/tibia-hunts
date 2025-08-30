@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/Vichoko/tibia-hunts/compare/v1.6.3...v1.7.0) (2025-08-30)
+
+
+### Features
+
+* auth allauth google ([#25](https://github.com/Vichoko/tibia-hunts/issues/25)) ([f8c69ba](https://github.com/Vichoko/tibia-hunts/commit/f8c69ba2b0c08ceacdc3d64e262a521fa95c66ae))
+
 ## [1.6.3](https://github.com/Vichoko/tibia-hunts/compare/v1.6.2...v1.6.3) (2025-08-30)
 
 
