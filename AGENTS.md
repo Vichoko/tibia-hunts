@@ -62,8 +62,8 @@ chore(deps): update django to 5.2
 |----------|----------|
 | Code Quality | PRs — Ruff lint + format check + Django system check |
 | Django Tests | PRs — migration checks + unit tests |
-| PR Title Check | PRs — validates conventional commit format |
-| PR Title Validation | PRs — additional title format validation |
+| PR Title Check | PRs — validates format via amannn/action-semantic-pull-request (types, scopes, subject case) |
+| PR Title Validation | PRs — validates format via regex + auto-comments on the PR if invalid |
 | Release | Push to main — semantic-release, changelog, version bump |
 | Deploy | Release complete — deploy to GAE |
 
