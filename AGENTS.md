@@ -27,10 +27,10 @@ A community platform for Tibia players to register and share hunting sessions, b
 
 | Layer         | Technology                  |
 |---------------|-----------------------------|
-| Language      | Python 3.11+                |
+| Language      | Python 3.11                 |
 | Web Framework | Django 5.2                  |
 | Auth          | django-allauth (Google OAuth) |
-| Database      | SQLite (dev), PostgreSQL (prod) |
+| Database      | SQLite (MVP, zero-cost) |
 | Linting       | Ruff (strict ruleset)       |
 | Packaging     | Poetry                      |
 | CI/CD         | GitHub Actions + semantic-release |
@@ -63,7 +63,8 @@ chore(deps): update django to 5.2
 | Code Quality | PRs — Ruff lint + format check + Django system check |
 | Django Tests | PRs — migration checks + unit tests |
 | PR Title Check | PRs — validates conventional commit format |
-| Release | Push to `main` — semantic-release, changelog, version bump |
+| PR Title Validation | PRs — additional title format validation |
+| Release | Push to main — semantic-release, changelog, version bump |
 | Deploy | Release complete — deploy to GAE |
 
 ## Code Quality Expectations
