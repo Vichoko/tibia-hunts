@@ -1,5 +1,5 @@
-* El usuario esta en Linux
+* El usuario está en Linux
 * Se usa bash como shell
-* Siempre que hagas un cambio, revisa si estamos en main o en otra rama
-* Si estas en main y haces un cambio, debes crear una feature branch, commit y push
-* Si estas en una feature branch y el cambio es nuevo, deberias ir a main y crear una nueva feature branch
+* Siempre revisa en qué rama estás antes de hacer cambios
+* Si estás en main y necesitas hacer un cambio, crea primero una feature branch desde main, haz el cambio, commitea y pushea
+* Si estás en una feature branch y el cambio corresponde a otra tarea, ve a main y crea una nueva feature branch
